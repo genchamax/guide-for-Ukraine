@@ -7,9 +7,9 @@ import java.util.List;
  */
 public interface AbstractDao<T> {
 
-    T getById(Integer id);
+    T getById(Integer id, Class<T> type);
 
-    List<T> findAll();
+    List<T> findAll(Class<T> type);
 
     T create(T entity);
 

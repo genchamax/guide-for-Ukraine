@@ -10,20 +10,14 @@ import java.util.List;
  */
 public class AbstractDaoImpl<T> implements AbstractDao<T> {
 
-    private Class<T> type;
-
-    public AbstractDaoImpl(Class<T> type) {
-        this.type = type;
-    }
-
     @Autowired
     protected HibernateTemplate ht;
 
-    public T getById(Integer id) {
+    public T getById(Integer id, Class<T> type) {
         return ht.get(type, id);
     }
 
-    public List<T> findAll() {
+    public List<T> findAll(Class<T> type) {
         return ht.loadAll(type);
     }
 
