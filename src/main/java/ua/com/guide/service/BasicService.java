@@ -2,7 +2,7 @@ package ua.com.guide.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.com.guide.dao.AbstractDao;
+import org.springframework.transaction.annotation.Transactional;
 import ua.com.guide.dao.AbstractDaoImpl;
 
 import java.util.List;
@@ -11,6 +11,7 @@ import java.util.List;
  * Created by Max on 09.08.2016.
  */
 @Service
+@Transactional(readOnly = false)
 public class BasicService<T> {
 
     @Autowired
