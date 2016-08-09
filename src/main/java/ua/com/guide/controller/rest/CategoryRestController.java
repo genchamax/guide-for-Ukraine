@@ -1,46 +1,47 @@
 package ua.com.guide.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import ua.com.guide.dao.AbstractDao;
+import org.springframework.web.bind.annotation.RestController;
 import ua.com.guide.model.Category;
+import ua.com.guide.service.CategoryService;
 
 import java.util.List;
 
 /**
  * Created by Max on 08.08.2016.
  */
-@Controller
-@RequestMapping("/category")
+@RestController
+@RequestMapping("/categories")
 public class CategoryRestController {
+
     @Autowired
-    @Qualifier("categoryDao")
-    private AbstractDao categoryDao;
+    private CategoryService categoryService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<Category> getAllCategories() {
-        return categoryDao.findAll();
+        System.out.println(categoryService.getAll());
+        return categoryService.getAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Category getCategoryById(@PathVariable("id") Integer id) {
-        return (Category) categoryDao.getById(id);
+        return (Category) categoryService.getById(id);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public String deleteCategory(@PathVariable Integer id) {
-        categoryDao.delete(categoryDao.getById(id));
+    public String deleteCategory(@PathVariable("id") Integer id) {
+        categoryService.deleteById(id);
         return "redirect:category";
     }
 
-//    @RequestMapping(value = "/", method = RequestMethod.POST)
-//    public String addNewCategory(@ModelAttribute("category") Category category ) {
-//        categoryDao.update(category);
-//        return "redirect:category";
-//    }
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public String addNewCategory(Category category) {
+        categoryService.update(category);
+        return "redirect:category";
+    }
+
 
 }

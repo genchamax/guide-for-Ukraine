@@ -7,36 +7,40 @@
 
     <context:annotation-config/>
 
-    <bean id="cityDao" class="ua.com.guide.dao.AbstractDaoImpl">
-        <constructor-arg value="ua.com.guide.model.City"/>
-    </bean>
+    <bean id="dao" class="ua.com.guide.dao.AbstractDaoImpl"/>
 
-    <bean id="commentDao" class="ua.com.guide.dao.AbstractDaoImpl">
-        <constructor-arg value="ua.com.guide.model.Comment"/>
-    </bean>
+    <bean id="categoryService" class="ua.com.guide.service.CategoryService"/>
 
-    <bean id="imageDao" class="ua.com.guide.dao.AbstractDaoImpl">
-        <constructor-arg value="ua.com.guide.model.Image"/>
-    </bean>
+    <!--<bean id="cityDao" class="ua.com.guide.dao.AbstractDaoImpl">-->
+    <!--<constructor-arg value="ua.com.guide.model.City"/>-->
+    <!--</bean>-->
 
-    <bean id="placeDao" class="ua.com.guide.dao.AbstractDaoImpl">
-        <constructor-arg value="ua.com.guide.model.Place"/>
-    </bean>
+    <!--<bean id="commentDao" class="ua.com.guide.dao.AbstractDaoImpl">-->
+    <!--<constructor-arg value="ua.com.guide.model.Comment"/>-->
+    <!--</bean>-->
 
-    <bean id="postDao" class="ua.com.guide.dao.AbstractDaoImpl">
-        <constructor-arg value="ua.com.guide.model.Post"/>
-    </bean>
+    <!--<bean id="imageDao" class="ua.com.guide.dao.AbstractDaoImpl">-->
+    <!--<constructor-arg value="ua.com.guide.model.Image"/>-->
+    <!--</bean>-->
 
-    <bean id="regionDao" class="ua.com.guide.dao.AbstractDaoImpl">
-        <constructor-arg value="ua.com.guide.model.Region"/>
-    </bean>
+    <!--<bean id="placeDao" class="ua.com.guide.dao.AbstractDaoImpl">-->
+    <!--<constructor-arg value="ua.com.guide.model.Place"/>-->
+    <!--</bean>-->
 
-    <bean id="userDao" class="ua.com.guide.dao.AbstractDaoImpl">
-        <constructor-arg value="ua.com.guide.model.User"/>
-    </bean>
+    <!--<bean id="postDao" class="ua.com.guide.dao.AbstractDaoImpl">-->
+    <!--<constructor-arg value="ua.com.guide.model.Post"/>-->
+    <!--</bean>-->
 
-    <bean id="categoryDao" class="ua.com.guide.dao.AbstractDaoImpl">
-        <constructor-arg value="ua.com.guide.model.Category"/>
-    </bean>
+    <!--<bean id="regionDao" class="ua.com.guide.dao.AbstractDaoImpl">-->
+    <!--<constructor-arg value="ua.com.guide.model.Region"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="userDao" class="ua.com.guide.dao.AbstractDaoImpl">-->
+    <!--<constructor-arg value="ua.com.guide.model.User"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="categoryDao" class="ua.com.guide.dao.AbstractDaoImpl">-->
+    <!--<constructor-arg value="ua.com.guide.model.Category"/>-->
+    <!--</bean>-->
 
 </beans>
