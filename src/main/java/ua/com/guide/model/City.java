@@ -1,5 +1,7 @@
 package ua.com.guide.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -20,7 +22,10 @@ public class City {
 
     @Column(name = "CITY_NAME", nullable = false)
     private String cityName;
-//
+
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "REGION_ID", nullable = false)
+    private Region region;
 //    @OneToMany(cascade = CascadeType.ALL, /*TODO What do that params*/mappedBy = "region", fetch = FetchType.LAZY)
 //    @JoinColumn(name = "IMAGE_ID")
 //    private List<Image> images;
@@ -62,11 +67,11 @@ public class City {
 //        this.images = images;
 //    }
 
-//    public Region getRegion() {
-//        return region;
-//    }
-//
-//    public void setRegion(Region region) {
-//        this.region = region;
-//    }
+    public Region getRegion() {
+        return region;
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
+    }
 }

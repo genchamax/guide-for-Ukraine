@@ -112,3 +112,10 @@ INSERT INTO region(region_name) VALUES
   ("Чернівецька область"),
   ("Чернігівська область"),
   ("АР Крим");
+
+
+INSERT INTO city(city_description, city_name, region_id) VALUES
+  ("SOME CITY", "afaf", 2),
+  ("SOME CITdsfY", "afadfdsf", 27),
+  ("SOME CdfsfITY", "879", 2),
+  ("SOME CqqqqqqITY", "3re3", 2)
