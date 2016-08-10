@@ -14,4 +14,14 @@
     <bean id="regionService" class="ua.com.guide.service.RegionService"/>
 
     <bean id="cityService" class="ua.com.guide.service.CityService"/>
+
+    <bean id="commentService" class="ua.com.guide.service.CommentService"/>
+
+    <bean id="imageService" class="ua.com.guide.service.ImageService"/>
+
+    <bean id="placeService" class="ua.com.guide.service.PlaceService"/>
+
+    <bean id="postService" class="ua.com.guide.service.PostService"/>
+
+    <bean id="userService" class="ua.com.guide.service.UserService"/>
 </beans>
