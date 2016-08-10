@@ -2,6 +2,7 @@ package ua.com.guide.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ua.com.guide.model.City;
 import ua.com.guide.model.Region;
 import ua.com.guide.service.RegionService;
 
@@ -44,6 +45,12 @@ public class RegionRestController {
     private String deleteRegion(@PathVariable("id") Integer id) {
         regionService.deleteById(id);
         return "redirect:";
+    }
+
+
+    @RequestMapping(value = "/{id}/cities", method = RequestMethod.GET)
+    public List<City> getCities(@PathVariable("id") Integer id) {
+        return regionService.getAllCityOfTheRegion(id);
     }
 
 }
