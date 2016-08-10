@@ -1,9 +1,9 @@
 package ua.com.guide.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ua.com.guide.model.Category;
+import ua.com.guide.model.Post;
 import ua.com.guide.service.CategoryService;
 
 import java.util.List;
@@ -48,4 +48,8 @@ public class CategoryRestController {
         return "redirect:category";
     }
 
+    @RequestMapping(value = "/{id}/posts", method = RequestMethod.GET)
+    public List<Post> getPostsByCategoryId(@PathVariable("id") Integer categoryId) {
+        return categoryService.getPostsOfTheCategory(categoryId);
+    }
 }

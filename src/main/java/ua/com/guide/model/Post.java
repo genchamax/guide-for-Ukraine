@@ -25,7 +25,7 @@ public class Post {
     @Column(name = "PUBLISH_DATE", nullable = false)
     private Date publishDate;
 
-    @OneToMany(cascade = CascadeType.REFRESH, mappedBy = "post")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<Comment> comments;
 
 //    @OneToMany(cascade = CascadeType.ALL, /*TODO What do that params*/mappedBy = "region", fetch = FetchType.LAZY)
