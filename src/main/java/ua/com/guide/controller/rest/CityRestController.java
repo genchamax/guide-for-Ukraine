@@ -19,13 +19,13 @@ public class CityRestController {
     private CityService cityService;
 
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
-    private List<Region> getAllCities() {
+    private List<City> getAllCities() {
         return cityService.getAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    private Region getCityById(@PathVariable("id") Integer id) {
-        return (Region) cityService.getById(id);
+    private City getCityById(@PathVariable("id") Integer id) {
+        return (City) cityService.getById(id);
     }
 
     @RequestMapping(value = {"", "/"}, method = RequestMethod.POST)
@@ -45,5 +45,11 @@ public class CityRestController {
     private String deleteCity(@PathVariable("id") Integer id) {
         cityService.deleteById(id);
         return "redirect:";
+    }
+
+
+    @RequestMapping(value = "/{id}/region", method = RequestMethod.GET)
+    public Region getRegion(@PathVariable("id") Integer id) {
+        return cityService.getRegion(id);
     }
 }

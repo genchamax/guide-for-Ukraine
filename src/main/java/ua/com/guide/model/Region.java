@@ -20,6 +20,7 @@ public class Region {
     @Column(name = "REGION_NAME", nullable = false)
     private String regionName;
 
+    //    If Delete Region delete all cities on this region
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "region")
     @JsonIgnore
     private List<City> cities;

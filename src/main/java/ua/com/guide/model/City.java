@@ -1,5 +1,6 @@
 package ua.com.guide.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -25,6 +26,7 @@ public class City {
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "REGION_ID", nullable = false)
+    @JsonIgnore
     private Region region;
 //    @OneToMany(cascade = CascadeType.ALL, /*TODO What do that params*/mappedBy = "region", fetch = FetchType.LAZY)
 //    @JoinColumn(name = "IMAGE_ID")
