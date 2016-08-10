@@ -1,5 +1,6 @@
 package ua.com.guide.service;
 
+import ua.com.guide.model.City;
 import ua.com.guide.model.Place;
 
 /**
@@ -11,4 +12,8 @@ public class PlaceService extends BasicService {
         super(Place.class);
     }
 
+    public City getCity(Integer placeId) {
+        Place place = (Place) getById(placeId);
+        return place.getCity();
+    }
 }
