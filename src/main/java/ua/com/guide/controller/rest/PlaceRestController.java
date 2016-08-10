@@ -41,6 +41,12 @@ public class PlaceRestController {
         return "redirect:";
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public String deletePlace(@PathVariable("id") Integer id) {
+        placeService.deleteById(id);
+        return "redirect:";
+    }
+
     @RequestMapping(value = "/{id}/city", method = RequestMethod.GET)
     public City getCity(@PathVariable("id") Integer placeId){
         return placeService.getCity(placeId);
