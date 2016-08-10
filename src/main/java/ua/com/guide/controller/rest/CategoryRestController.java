@@ -1,10 +1,8 @@
 package ua.com.guide.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 import ua.com.guide.model.Category;
 import ua.com.guide.service.CategoryService;
 
@@ -20,7 +18,7 @@ public class CategoryRestController {
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
     public List<Category> getAllCategories() {
         System.out.println(categoryService.getAll());
         return categoryService.getAll();
@@ -37,11 +35,17 @@ public class CategoryRestController {
         return "redirect:category";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public String addNewCategory(Category category) {
-        categoryService.update(category);
+    @RequestMapping(value = {"", "/"}, method = RequestMethod.POST)
+    public String addNewCategory(@RequestBody Category category) {
+        categoryService.create(category);
         return "redirect:category";
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public String changeCategory(@PathVariable("id") Integer categoryId, @RequestBody Category category) {
+        category.setCategoryId(categoryId);
+        categoryService.update(category);
+        return "redirect:category";
+    }
 
 }

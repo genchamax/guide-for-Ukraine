@@ -1,5 +1,7 @@
 package ua.com.guide.model;
 
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 import javax.persistence.*;
 
 /**

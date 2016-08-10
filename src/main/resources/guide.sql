@@ -59,7 +59,7 @@ CREATE TABLE `user` (
 CREATE TABLE post /* Check grammar */ (
   id           INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
   post_name    VARCHAR(50)        NOT NULL,
-  post_body  TEXT               NOT NULL,
+  post_body    TEXT               NOT NULL,
   place_id     INT                NOT NULL,
   publish_date DATE               NOT NULL,
   image_id     INT                NULL,
@@ -85,3 +85,30 @@ CREATE TABLE `comment` (
 
 ALTER TABLE `user`
   ADD CONSTRAINT fk_user_favourite_posts FOREIGN KEY (favourite_posts_id) REFERENCES post (id);
+
+INSERT INTO region(region_name) VALUES
+  ("Вінницька область"),
+  ("Волинська область"),
+  ("Дніпропетровська область"),
+  ("Донецька область"),
+  ("Житомирська область"),
+  ("Закарпатська область"),
+  ("Запорізька область"),
+  ("Івано-Франківська область"),
+  ("Київська область"),
+  ("Кіровоградська область"),
+  ("Луганська область"),
+  ("Львівська область"),
+  ("Миколаївська область"),
+  ("Одеська область"),
+  ("Полтавська область"),
+  ("Рівненська область"),
+  ("Сумська область"),
+  ("Тернопільська область"),
+  ("Харківська область"),
+  ("Херсонська область"),
+  ("Хмельницька область"),
+  ("Черкаська область"),
+  ("Чернівецька область"),
+  ("Чернігівська область"),
+  ("АР Крим");
