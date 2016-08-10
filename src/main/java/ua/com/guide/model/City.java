@@ -28,6 +28,11 @@ public class City {
     @JoinColumn(name = "REGION_ID", nullable = false)
     @JsonIgnore
     private Region region;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "city")
+    @JsonIgnore
+    private List<Place> places;
+
 //    @OneToMany(cascade = CascadeType.ALL, /*TODO What do that params*/mappedBy = "region", fetch = FetchType.LAZY)
 //    @JoinColumn(name = "IMAGE_ID")
 //    private List<Image> images;
@@ -75,5 +80,13 @@ public class City {
 
     public void setRegion(Region region) {
         this.region = region;
+    }
+
+    public List<Place> getPlaces() {
+        return places;
+    }
+
+    public void setPlaces(List<Place> places) {
+        this.places = places;
     }
 }

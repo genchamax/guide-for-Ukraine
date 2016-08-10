@@ -1,7 +1,8 @@
 package ua.com.guide.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * Created by Max on 06.08.2016.
@@ -22,9 +23,10 @@ public class Place {
 //    @JoinColumn(name = "IMAGE_ID")
 //    private List<Image> images;
 
-//    @ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "CITY_ID", nullable = false)
-//    private City city;
+    @ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "CITY_ID", nullable = false)
+    @JsonIgnore
+    private City city;
 
     public Integer getPlaceId() {
         return placeId;
@@ -50,11 +52,11 @@ public class Place {
 //        this.images = images;
 //    }
 //
-//    public City getCity() {
-//        return city;
-//    }
-//
-//    public void setCity(City city) {
-//        this.city = city;
-//    }
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
 }
