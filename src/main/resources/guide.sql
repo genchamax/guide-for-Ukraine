@@ -2,6 +2,8 @@ CREATE DATABASE guide;
 
 USE guide;
 
+# TODO: Create USER_FAVOURITE_POST TABLE (For ManyToMany relationship)
+
 CREATE TABLE image (
   id          INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
   image_title VARCHAR(255) NULL,
@@ -50,13 +52,11 @@ CREATE TABLE `user` (
   user_surname       VARCHAR(100) NULL,
   user_patronymic    VARCHAR(100) NULL,
   user_birth         DATE         NULL,
-  user_status        VARCHAR(20)  NOT NULL,
-  favourite_posts_id INT          NULL
-  --    CONSTRAINT fk_user_favourite_posts FOREIGN KEY (favourite_posts_id) REFERENCES post(id)
+  user_status        VARCHAR(20)  NOT NULL
 );
 
 
-CREATE TABLE post /* Check grammar */ (
+CREATE TABLE post (
   id           INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
   post_name    VARCHAR(50)        NOT NULL,
   post_body    TEXT               NOT NULL,
@@ -83,10 +83,16 @@ CREATE TABLE `comment` (
   CONSTRAINT fk_comment_post FOREIGN KEY (post_id) REFERENCES post (id)
 );
 
-ALTER TABLE `user`
-  ADD CONSTRAINT fk_user_favourite_posts FOREIGN KEY (favourite_posts_id) REFERENCES post (id);
+#ManyToMany User and Favourite post
+CREATE TABLE USER_FAVOURITE_POST (
+  id      INT PRIMARY KEY NOT NULL,
+  user_id INT             NOT NULL,
+  post_id INT             NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES `user` (id),
+  FOREIGN KEY (post_id) REFERENCES post (id)
+);
 
-INSERT INTO region(region_name) VALUES
+INSERT INTO region (region_name) VALUES
   ("Вінницька область"),
   ("Волинська область"),
   ("Дніпропетровська область"),
@@ -114,8 +120,8 @@ INSERT INTO region(region_name) VALUES
   ("АР Крим");
 
 
-INSERT INTO city(city_description, city_name, region_id) VALUES
+INSERT INTO city (city_description, city_name, region_id) VALUES
   ("SOME CITY", "afaf", 2),
-  ("SOME CITdsfY", "afadfdsf", 27),
+  ("SOME CITdsfY", "afadfdsf", 3),
   ("SOME CdfsfITY", "879", 2),
-  ("SOME CqqqqqqITY", "3re3", 2)
+  ("SOME CqqqqqqITY", "3re3", 2);

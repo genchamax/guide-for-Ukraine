@@ -2,7 +2,6 @@ package ua.com.guide.model;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Max on 06.08.2016.
@@ -21,18 +20,10 @@ public class Comment {
 
     @Column(name = "COMMENT_DATE", nullable = false)
     private Date commentDate;
-//
-//    @OneToMany(cascade = CascadeType.ALL, /*TODO What do that params*/mappedBy = "region", fetch = FetchType.LAZY)
-//    @JoinColumn(name = "IMAGE_ID")
-//    private List<Image> images;
 
-//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "USER_ID", nullable = false)
-//    private User user;
-//
-//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "POST_ID", nullable = false)
-//    private Post post;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID", nullable = false)
+    private User author;
 
     public Integer getCommentId() {
         return commentId;
@@ -58,27 +49,11 @@ public class Comment {
         this.commentDate = commentDate;
     }
 
-//    public List<Image> getImages() {
-//        return images;
-//    }
-//
-//    public void setImages(List<Image> images) {
-//        this.images = images;
-//    }
-//
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
-//
-//    public Post getPost() {
-//        return post;
-//    }
-//
-//    public void setPost(Post post) {
-//        this.post = post;
-//    }
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
 }

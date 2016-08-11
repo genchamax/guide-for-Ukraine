@@ -1,5 +1,7 @@
 package ua.com.guide.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -28,17 +30,24 @@ public class Post {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<Comment> comments;
 
-//    @OneToMany(cascade = CascadeType.ALL, /*TODO What do that params*/mappedBy = "region", fetch = FetchType.LAZY)
-//    @JoinColumn(name = "IMAGE_ID")
-//    private List<Image> images;
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "CATEGORY_ID", nullable = false)
+    private Category category;
 
-//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "PLACE_ID", nullable = false)
-//    private Place place;
-//
-//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "USER_ID", nullable = false)
-//    private User user;
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "PLACE_ID", nullable = false)
+    private Place place;
+
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "USER_ID", nullable = false)
+    private User author;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "USER_FAVOURITE_POST",
+            joinColumns = @JoinColumn(name = "USER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "POST_ID"))
+    @JsonIgnore
+    private List<User> likingUser; // TODO: 11.08.2016 Check grammar
 
     public Integer getPostId() {
         return postId;
@@ -72,27 +81,43 @@ public class Post {
         this.publishDate = publishDate;
     }
 
-//    public List<Image> getImages() {
-//        return images;
-//    }
-//
-//    public void setImages(List<Image> images) {
-//        this.images = images;
-//    }
-//
-//    public Place getPlace() {
-//        return place;
-//    }
-//
-//    public void setPlace(Place place) {
-//        this.place = place;
-//    }
-//
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+    public Place getPlace() {
+        return place;
+    }
+
+    public void setPlace(Place place) {
+        this.place = place;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    public List<User> getLikingUser() {
+        return likingUser;
+    }
+
+    public void setLikingUser(List<User> likingUser) {
+        this.likingUser = likingUser;
+    }
 }

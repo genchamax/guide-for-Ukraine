@@ -1,5 +1,7 @@
 package ua.com.guide.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -17,9 +19,11 @@ public class User {
     private Integer userId;
 
     @Column(name = "USER_PASSWORD", nullable = false)
+    @JsonIgnore
     private String password;
 
     @Column(name = "USER_LOGIN", nullable = false)
+    @JsonIgnore
     private String login;
 
     @Column(name = "USER_EMAIL")
@@ -40,6 +44,18 @@ public class User {
     @Column(name = "USER_STATUS", nullable = false)
     private String userStatus;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonIgnore
+    private List<Post> userPosts;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "USER_FAVOURITE_POST",
+            joinColumns = @JoinColumn(name = "post_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @JsonIgnore
+    private List<Post> likedPosts;
+
+    @OneToMany
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
 //    @JoinColumn(name = "FAVOURITE_POSTS_ID")
 //    private List<Post> favouritePosts;
