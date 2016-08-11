@@ -132,11 +132,19 @@ public class User {
         this.userStatus = userStatus;
     }
 
-//    public List<Post> getFavouritePosts() {
-//        return favouritePosts;
-//    }
-//
-//    public void setFavouritePosts(List<Post> favouritePosts) {
-//        this.favouritePosts = favouritePosts;
-//    }
+    public List<Post> getUserPosts() {
+        return userPosts;
+    }
+
+    public void setUserPosts(List<Post> userPosts) {
+        this.userPosts = userPosts;
+    }
+
+    public List<Post> getLikedPosts() {
+        return likedPosts;
+    }
+
+    public void setLikedPosts(List<Post> likedPosts) {
+        this.likedPosts = likedPosts;
+    }
 }

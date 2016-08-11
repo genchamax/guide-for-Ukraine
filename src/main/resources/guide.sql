@@ -2,8 +2,6 @@ CREATE DATABASE guide;
 
 USE guide;
 
-# TODO: Create USER_FAVOURITE_POST TABLE (For ManyToMany relationship)
-
 CREATE TABLE image (
   id          INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
   image_title VARCHAR(255) NULL,
@@ -20,7 +18,6 @@ CREATE TABLE region (
   region_name VARCHAR(50)        NOT NULL,
   image_id    INT                NULL,
   CONSTRAINT fk_region_image FOREIGN KEY (image_id) REFERENCES image (id)
-  --  PRIMARY KEY (id)
 );
 
 CREATE TABLE city (
@@ -125,3 +122,6 @@ INSERT INTO city (city_description, city_name, region_id) VALUES
   ("SOME CITdsfY", "afadfdsf", 3),
   ("SOME CdfsfITY", "879", 2),
   ("SOME CqqqqqqITY", "3re3", 2);
+
+INSERT INTO user(user_password, user_login, email, user_name, user_surname, user_patronymic, user_birth, user_status) VALUE
+  ("loloco97", "vikaafanaseva", "vikalorax@mail.ru", "Вікторія", "Афанасьєва", "Віталіївна", "1997-07-10", "ADMIN")
