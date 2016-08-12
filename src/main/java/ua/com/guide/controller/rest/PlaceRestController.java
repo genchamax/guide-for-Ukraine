@@ -12,7 +12,7 @@ import java.util.List;
  * Created by Max on 10.08.2016.
  */
 @RestController
-@RequestMapping("/places")
+@RequestMapping("/api/places")
 public class PlaceRestController {
 
     @Autowired

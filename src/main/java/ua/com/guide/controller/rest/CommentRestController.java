@@ -10,7 +10,7 @@ import ua.com.guide.service.CommentService;
  * Created by Max on 10.08.2016.
  */
 @RestController
-@RequestMapping("/comments")
+@RequestMapping("/api/comments")
 public class CommentRestController {
 
     @Autowired
