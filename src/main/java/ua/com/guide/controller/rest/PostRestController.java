@@ -40,7 +40,7 @@ public class PostRestController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public String changePost(@PathVariable("id") Integer id, @RequestBody Post post) {
+    public String editPost(@PathVariable("id") Integer id, @RequestBody Post post) {
         post.setPostId(id);
         postService.update(post);
         return "redirect:";

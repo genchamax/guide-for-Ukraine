@@ -41,7 +41,7 @@ public class UserRestController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public String changeUser(@PathVariable("id") Integer userId, @RequestBody User user) {
+    public String editUser(@PathVariable("id") Integer userId, @RequestBody User user) {
         user.setUserId(userId);
         userService.update(user);
         return "redirect:";

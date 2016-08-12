@@ -38,7 +38,7 @@ public class CityRestController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    private String changeCity(@PathVariable("id") Integer id, @RequestBody City city) {
+    private String editCity(@PathVariable("id") Integer id, @RequestBody City city) {
         city.setCityId(id);
         cityService.update(city);
         return "redirect:";

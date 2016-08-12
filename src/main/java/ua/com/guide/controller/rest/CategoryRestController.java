@@ -42,7 +42,7 @@ public class CategoryRestController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public String changeCategory(@PathVariable("id") Integer categoryId, @RequestBody Category category) {
+    public String editCategory(@PathVariable("id") Integer categoryId, @RequestBody Category category) {
         category.setCategoryId(categoryId);
         categoryService.update(category);
         return "redirect:category";

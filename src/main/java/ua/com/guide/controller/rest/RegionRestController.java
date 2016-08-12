@@ -35,7 +35,7 @@ public class RegionRestController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    private String changeRegion(@PathVariable("id") Integer id, @RequestBody Region region) {
+    private String editRegion(@PathVariable("id") Integer id, @RequestBody Region region) {
         region.setRegionId(id);
         regionService.update(region);
         return "redirect:";

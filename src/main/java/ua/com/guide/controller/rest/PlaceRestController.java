@@ -35,7 +35,7 @@ public class PlaceRestController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public String changePlace(@PathVariable("id") Integer id, @RequestBody Place place) {
+    public String editPlace(@PathVariable("id") Integer id, @RequestBody Place place) {
         place.setPlaceId(id);
         placeService.update(place);
         return "redirect:";

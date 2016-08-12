@@ -23,7 +23,7 @@ public class CommentRestController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public String changeComment(@PathVariable("id") Integer commentId, @RequestBody Comment comment) {
+    public String editComment(@PathVariable("id") Integer commentId, @RequestBody Comment comment) {
         comment.setCommentId(commentId);
         commentService.update(comment);
         return "redirect:";
