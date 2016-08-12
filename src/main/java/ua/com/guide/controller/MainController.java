@@ -13,4 +13,14 @@ public class MainController {
     public String goIndex() {
         return "index";
     }
+
+    @RequestMapping(value = "/regions", method = RequestMethod.GET)
+    public String goRegions(){
+        return "regions";
+    }
+
+    @RequestMapping(value = "/cities", method = RequestMethod.GET)
+    public String goCities(){
+        return "cities";
+    }
 }
