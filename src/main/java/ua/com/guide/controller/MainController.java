@@ -15,12 +15,27 @@ public class MainController {
     }
 
     @RequestMapping(value = "/regions", method = RequestMethod.GET)
-    public String goRegions(){
+    public String goRegions() {
         return "regions";
     }
 
     @RequestMapping(value = "/cities", method = RequestMethod.GET)
-    public String goCities(){
+    public String goCities() {
         return "cities";
+    }
+
+    @RequestMapping(value = "/places", method = RequestMethod.GET)
+    public String goPlaces() {
+        return "places";
+    }
+
+    @RequestMapping(value = "/posts", method = RequestMethod.GET)
+    public String goPosts() {
+        return "posts";
+    }
+
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public String goAdmin() {
+        return "admin/index";
     }
 }

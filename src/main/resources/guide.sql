@@ -123,5 +123,5 @@ INSERT INTO city (city_description, city_name, region_id) VALUES
   ("SOME CdfsfITY", "879", 2),
   ("SOME CqqqqqqITY", "3re3", 2);
 
-INSERT INTO user(user_password, user_login, email, user_name, user_surname, user_patronymic, user_birth, user_status) VALUE
-  ("loloco97", "vikaafanaseva", "vikalorax@mail.ru", "Вікторія", "Афанасьєва", "Віталіївна", "1997-07-10", "ADMIN")
+INSERT INTO user(user_password, user_login, email, user_name, user_surname, user_patronymic, user_birth, user_status) VALUES
+  ("loloco97", "vikaafanaseva", "vikalorax@mail.ru", "Вікторія", "Афанасьєва", "Віталіївна", "1997-07-10", "ADMIN");
