@@ -26,7 +26,7 @@ public class User {
     @JsonIgnore
     private String login;
 
-    @Column(name = "USER_EMAIL")
+    @Column(name = "EMAIL")
     private String email;
 
     @Column(name = "USER_NAME", nullable = false)
@@ -44,7 +44,7 @@ public class User {
     @Column(name = "USER_STATUS", nullable = false)
     private String userStatus;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "author")
     @JsonIgnore
     private List<Post> userPosts;
 

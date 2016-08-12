@@ -27,7 +27,7 @@ public class Post {
     @Column(name = "PUBLISH_DATE", nullable = false)
     private Date publishDate;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Comment> comments;
 
     @ManyToOne(cascade = CascadeType.REFRESH)

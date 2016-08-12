@@ -48,6 +48,7 @@ public class CategoryRestController {
         return "redirect:category";
     }
 
+    // TODO: 11.08.2016 Test this method
     @RequestMapping(value = "/{id}/posts", method = RequestMethod.GET)
     public List<Post> getPostsByCategoryId(@PathVariable("id") Integer categoryId) {
         return categoryService.getPostsOfTheCategory(categoryId);

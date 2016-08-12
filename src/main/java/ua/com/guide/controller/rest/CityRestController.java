@@ -1,12 +1,14 @@
 package ua.com.guide.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.*;
 import ua.com.guide.model.City;
 import ua.com.guide.model.Place;
 import ua.com.guide.model.Region;
 import ua.com.guide.service.CityService;
 
+import java.beans.PropertyEditorSupport;
 import java.util.List;
 
 /**
@@ -48,12 +50,12 @@ public class CityRestController {
         return "redirect:";
     }
 
-
     @RequestMapping(value = "/{id}/region", method = RequestMethod.GET)
     public Region getRegion(@PathVariable("id") Integer id) {
         return cityService.getRegion(id);
     }
 
+    // TODO: 11.08.2016 Test this method
     @RequestMapping(value = "/{id}/places", method = RequestMethod.GET)
     public List<Place> getPlaces(@PathVariable("id") Integer cityId) {
         return cityService.getAllPlacesOfTheCity(cityId);

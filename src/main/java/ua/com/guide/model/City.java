@@ -1,7 +1,6 @@
 package ua.com.guide.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.List;
@@ -33,15 +32,6 @@ public class City {
     @JsonIgnore
     private List<Place> places;
 
-//    @OneToMany(cascade = CascadeType.ALL, /*TODO What do that params*/mappedBy = "region", fetch = FetchType.LAZY)
-//    @JoinColumn(name = "IMAGE_ID")
-//    private List<Image> images;
-
-//    @ManyToOne(cascade = CascadeType.ALL,
-//            fetch = FetchType.LAZY)
-//    @JoinColumn(name = "REGION_ID", nullable = false)
-//    private Region region;
-
     public Integer getCityId() {
         return cityId;
     }
@@ -65,14 +55,6 @@ public class City {
     public void setCityName(String cityName) {
         this.cityName = cityName;
     }
-
-//    public List<Image> getImages() {
-//        return images;
-//    }
-//
-//    public void setImages(List<Image> images) {
-//        this.images = images;
-//    }
 
     public Region getRegion() {
         return region;

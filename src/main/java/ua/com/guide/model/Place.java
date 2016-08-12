@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Created by Max on 06.08.2016.
  */
 @Entity
-@Table(name = "PLACE" )
+@Table(name = "PLACE")
 public class Place {
 
     @Id
@@ -19,11 +19,7 @@ public class Place {
     @Column(name = "PLACE_NAME", nullable = false)
     private String placeName;
 
-//    @OneToMany(cascade = CascadeType.ALL, /*TODO What do that params*/mappedBy = "region", fetch = FetchType.LAZY)
-//    @JoinColumn(name = "IMAGE_ID")
-//    private List<Image> images;
-
-    @ManyToOne (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "CITY_ID", nullable = false)
     @JsonIgnore
     private City city;
@@ -43,15 +39,7 @@ public class Place {
     public void setPlaceName(String placeName) {
         this.placeName = placeName;
     }
-//
-//    public List<Image> getImages() {
-//        return images;
-//    }
-//
-//    public void setImages(List<Image> images) {
-//        this.images = images;
-//    }
-//
+
     public City getCity() {
         return city;
     }
