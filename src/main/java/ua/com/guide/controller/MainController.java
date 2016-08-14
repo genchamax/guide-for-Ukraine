@@ -38,4 +38,9 @@ public class MainController {
     public String goAdmin() {
         return "admin/index";
     }
+
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public String goTest() {
+        return "/test/sidenav";
+    }
 }
