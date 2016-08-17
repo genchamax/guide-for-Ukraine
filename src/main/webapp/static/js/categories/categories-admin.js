@@ -2,11 +2,27 @@
  * Created by Max on 15.08.2016.
  */
 (function () {
-
+    /**
+     * Info about categories
+     * @type {Array}
+     */
     var categories = [];
+
+    /**
+     * Need for onclick() events working correct
+     */
     var context = this;
+
+    /**
+     * Check if you can create/edit category
+     * @type {boolean}
+     */
     var isClickable = true;
 
+    /**
+     * GET
+     * Receive categories data
+     */
     $.ajax({
         method: "GET",
         url: "/api/categories",
@@ -18,6 +34,11 @@
         }
     });
 
+    /**
+     * DELETE
+     * Delete category by category id.
+     * @param categoryId
+     */
     context.deleteById = function (categoryId) {
         $.ajax({
             method: "DELETE",
@@ -29,6 +50,11 @@
         });
     };
 
+    /**
+     * POST
+     * Create new category. Id is generated value
+     * @param newCategory
+     */
     function createNewCategory(newCategory) {
         $.ajax({
             type: "POST",
@@ -41,6 +67,11 @@
         });
     };
 
+    /**
+     * PUT
+     * Edit category by id. Category name get from input element.
+     * @param categoryId
+     */
     this.editCategoryById = function (categoryId) {
 
         var categoryName = $(".edit-category-input").val();
@@ -59,6 +90,9 @@
         });
     };
 
+    /**
+     * Create list of categories.
+     */
     function createCategoryList() {
         $("#category-wrapper").append("<div class='container'><div class='row'>");
         for (var i = 0; i < categories.length; i++) {
@@ -80,6 +114,9 @@
         $("#category-wrapper").append("</div></div>")
     }
 
+    /**
+     * Onclick handler for .add-btn. Insert input field before current element and set focus on it
+     */
     $("#category-wrapper").on("click", ".add-btn", function () {
         if (isClickable) {
             $(
@@ -91,10 +128,15 @@
             $("#category-wrapper input[type='text']").focus();
         }
         isClickable = false;
-
     });
 
-
+    /**
+     * Work if isClickable === true;
+     * Create input field before current elem with value of category name. Hide current element
+     * Set isClickable = false
+     * @param category
+     * @param context current context (this)
+     */
     this.editCategory = function (category, context) {
         if (isClickable) {
             $(
@@ -112,17 +154,31 @@
         isClickable = false;
     };
 
+    /**
+     * Onclick listener for .cancel-edit-category.
+     * Remove input field and make category item visible
+     * Set isClickable true
+     */
     $("#category-wrapper").on("click", ".cancel-edit-category", function () {
        $(this).parent().remove();
         $(".category-item").removeClass("hidden");
         isClickable = true;
     });
 
+    /**
+     * Onclick listener for .cancel.
+     * Delete input field for new category.
+     * Set isClickable true
+     */
     $("#category-wrapper").on("click", ".cancel", function (e) {
         $(this).parent().remove();
         isClickable = true;
     });
 
+    /**
+     * Onclick listener for .accept.
+     * Read from <input> text (category name) and pass AJAX query with them.
+     */
     $("#category-wrapper").on("click", ".accept", function () {
         createNewCategory({
             'categoryName': $("#category-wrapper input[type='text']").val().toString()
