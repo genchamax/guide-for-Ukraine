@@ -43,4 +43,10 @@ public class MainController {
     public String goTest() {
         return "/test/sidenav";
     }
+
+    @RequestMapping(value = "/admin/categories", method = RequestMethod.GET)
+    public String goAdminCategories() {
+        System.out.println("Catch em");
+        return "/admin/categories";
+    }
 }
