@@ -49,4 +49,9 @@ public class MainController {
         System.out.println("Catch em");
         return "/admin/categories";
     }
+
+    @RequestMapping(value = "test/post/new", method = RequestMethod.GET)
+    public String goNewPost(){
+        return "test/newPost";
+    }
 }

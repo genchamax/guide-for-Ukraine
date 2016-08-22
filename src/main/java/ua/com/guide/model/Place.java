@@ -21,7 +21,6 @@ public class Place {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "CITY_ID", nullable = false)
-    @JsonIgnore
     private City city;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

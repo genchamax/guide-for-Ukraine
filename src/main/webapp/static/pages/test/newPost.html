@@ -3,8 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Створити новий пост</title>
+    <link rel="stylesheet" href="/static/components/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/components/components-font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/post/post.css">
 </head>
 <body>
+<div id="wrapper-new-post" class="container">
+    <div class="row">
+        <div class="input-group col-md-offset-1 col-md-10 col-md-offset-1 row">
+            <div class="row">
 
+                <input type="text" class="form-control col-md-6" placeholder="Enter post name" id="post-name"/>
+                <textarea class="form-control" placeholder="Enter post body" id="post-body"></textarea>
+                <select class="col-md-4" id="post-region">
+                    <option disabled hidden selected>Оберіть регіон</option>
+                </select>
+                <select class="col-md-3 col-md-offset-1" id="post-city" disabled></select>
+                <select class="col-md-3 col-md-offset-1" id="post-place" disabled></select>
+            </div>
+                <select  id="post-category">
+                    <option disabled hidden selected>Категорія</option>
+                </select>
+
+        </div>
+    </div>
+</div>
+<a href="#" id="Submit" class="btn btn-success"><span class="fa fa-save"></span></a>
+</div>
+</div>
+<!--SCRIPTs-->
+<script src="/static/components/jquery/jquery.min.js"></script>
+<script src="/static/components/bootstrap3/js/bootstrap.min.js"></script>
+
+<script src="/static/js/post/post.js"></script>
 </body>
 </html>
