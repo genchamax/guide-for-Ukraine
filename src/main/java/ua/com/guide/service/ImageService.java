@@ -11,4 +11,8 @@ public class ImageService extends BasicService {
         super(Image.class);
     }
 
+    public void saveImage(String regionName, String cityName, String placeName, String postId ){
+
+    }
+
 }
