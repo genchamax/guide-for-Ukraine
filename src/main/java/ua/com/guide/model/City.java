@@ -32,10 +32,6 @@ public class City {
     @JsonIgnore
     private List<Place> places;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Image image;
-
     public Integer getCityId() {
         return cityId;
     }
@@ -74,13 +70,5 @@ public class City {
 
     public void setPlaces(List<Place> places) {
         this.places = places;
-    }
-
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
     }
 }

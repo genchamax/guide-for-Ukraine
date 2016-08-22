@@ -1,10 +1,7 @@
 package ua.com.guide.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Max on 06.08.2016.
@@ -27,9 +24,6 @@ public class Comment {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID", nullable = false)
     private User author;
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Image> images;
 
     public Integer getCommentId() {
         return commentId;
@@ -63,11 +57,4 @@ public class Comment {
         this.author = author;
     }
 
-    public List<Image> getImages() {
-        return images;
-    }
-
-    public void setImages(List<Image> images) {
-        this.images = images;
-    }
 }

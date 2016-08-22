@@ -1,7 +1,5 @@
 package ua.com.guide.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 /**
@@ -22,9 +20,6 @@ public class Place {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "CITY_ID", nullable = false)
     private City city;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Image image;
 
     public Integer getPlaceId() {
         return placeId;
@@ -48,13 +43,5 @@ public class Place {
 
     public void setCity(City city) {
         this.city = city;
-    }
-
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
     }
 }

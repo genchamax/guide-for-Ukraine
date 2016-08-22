@@ -49,9 +49,6 @@ public class Post {
     @JsonIgnore
     private List<User> likingUser; // TODO: 11.08.2016 Check grammar
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Image> images;
-
     public Integer getPostId() {
         return postId;
     }
@@ -122,13 +119,5 @@ public class Post {
 
     public void setLikingUser(List<User> likingUser) {
         this.likingUser = likingUser;
-    }
-
-    public List<Image> getImages() {
-        return images;
-    }
-
-    public void setImages(List<Image> images) {
-        this.images = images;
     }
 }

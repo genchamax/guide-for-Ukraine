@@ -25,9 +25,6 @@ public class Region {
 //    @JsonIgnore
     private List<City> cities;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Image image;
-
     public Integer getRegionId() {
         return regionId;
     }
@@ -50,13 +47,5 @@ public class Region {
 
     public void setCities(List<City> cities) {
         this.cities = cities;
-    }
-
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
     }
 }
