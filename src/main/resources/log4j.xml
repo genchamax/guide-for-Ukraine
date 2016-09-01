@@ -9,7 +9,7 @@
         </layout>
     </appender>
 
-    <category name="ua.com.guide">
+    <category name="ua.com.guide.service">
         <priority value="all"/>
         <appender-ref ref="consoleAppender"/>
     </category>
