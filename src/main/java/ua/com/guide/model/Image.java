@@ -5,12 +5,14 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * Created by Max on 31.08.2016.
  */
-public class ImageInfo {
+// TODO: 01.09.2016 Make validation
+public class Image {
 
     private Integer regionId;
     private Integer cityId;
     private Integer placeId;
     private Integer postId;
+    private MultipartFile imageFile;
 
     public Integer getRegionId() {
         return regionId;
@@ -42,5 +44,13 @@ public class ImageInfo {
 
     public void setPostId(Integer postId) {
         this.postId = postId;
+    }
+
+    public MultipartFile getImageFile() {
+        return imageFile;
+    }
+
+    public void setImageFile(MultipartFile imageFile) {
+        this.imageFile = imageFile;
     }
 }
