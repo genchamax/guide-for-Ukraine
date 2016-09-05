@@ -1,6 +1,7 @@
 package ua.com.guide.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,7 +23,7 @@ public class Region {
 
     //    If Delete Region delete all cities on this region
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "region")
-//    @JsonIgnore
+//    @JsonIgnoreProperties
     private List<City> cities;
 
     public Integer getRegionId() {

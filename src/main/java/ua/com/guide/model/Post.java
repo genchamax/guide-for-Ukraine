@@ -1,6 +1,6 @@
 package ua.com.guide.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -46,7 +46,7 @@ public class Post {
     @JoinTable(name = "USER_FAVOURITE_POST",
             joinColumns = @JoinColumn(name = "USER_ID"),
             inverseJoinColumns = @JoinColumn(name = "POST_ID"))
-    @JsonIgnore
+    @JsonIgnoreProperties(allowSetters = true)
     private List<User> likingUser; // TODO: 11.08.2016 Check grammar
 
     public Integer getPostId() {

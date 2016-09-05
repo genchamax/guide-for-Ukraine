@@ -1,5 +1,7 @@
 package ua.com.guide.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -24,6 +26,10 @@ public class Comment {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID", nullable = false)
     private User author;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(allowSetters = true)
+    private Post post;
 
     public Integer getCommentId() {
         return commentId;

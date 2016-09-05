@@ -1,6 +1,7 @@
 package ua.com.guide.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -19,11 +20,11 @@ public class User {
     private Integer userId;
 
     @Column(name = "USER_PASSWORD", nullable = false)
-    @JsonIgnore
+    @JsonIgnoreProperties(allowSetters = true)
     private String password;
 
     @Column(name = "USER_LOGIN", nullable = false)
-    @JsonIgnore
+    @JsonIgnoreProperties(allowSetters = true)
     private String login;
 
     @Column(name = "EMAIL")
@@ -45,17 +46,16 @@ public class User {
     private String userStatus;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "author")
-    @JsonIgnore
+    @JsonIgnoreProperties(allowSetters = true)
     private List<Post> userPosts;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "USER_FAVOURITE_POST",
             joinColumns = @JoinColumn(name = "post_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
-    @JsonIgnore
+    @JsonIgnoreProperties(allowSetters = true)
     private List<Post> likedPosts;
 
-    @OneToMany
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
 //    @JoinColumn(name = "FAVOURITE_POSTS_ID")
 //    private List<Post> favouritePosts;
