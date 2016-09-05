@@ -1,21 +1,15 @@
 package ua.com.guide.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 import ua.com.guide.model.Image;
 import ua.com.guide.service.ImageService;
 
 import javax.servlet.ServletContext;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.util.List;
 
 /**
  * Created by Max on 12.08.2016.
@@ -28,6 +22,27 @@ public class ImageRestController implements ServletContextAware {
 
     @Autowired
     private ImageService imageService;
+
+    @RequestMapping(value = "region/{regionId}", method = RequestMethod.GET)
+    private @ResponseBody List<String> getImagesPathOfRegionById(@PathVariable("regionId") Integer id) {
+        return imageService.getImagesOfRegion(servletContext.getRealPath("/"), id);
+    }
+
+    @RequestMapping(value = "city/{cityId}", method = RequestMethod.GET)
+    private @ResponseBody List<String> getImagesPathOfCityById(@PathVariable("cityId") Integer id) {
+        return imageService.getImagesOfCity(servletContext.getRealPath("/"), id);
+    }
+
+    @RequestMapping(value = "place/{placeId}", method = RequestMethod.GET)
+    private @ResponseBody List<String> getImagesPathOfPlaceById(@PathVariable("placeId") Integer id) {
+        return imageService.getImagesOfPlace(servletContext.getRealPath("/"), id);
+    }
+
+    @RequestMapping(value = "post/{postId}", method = RequestMethod.GET)
+    private @ResponseBody List<String> getImagesPathOfPostById(@PathVariable("postId") Integer id) {
+        return imageService.getImagesOfPost(servletContext.getRealPath("/"), id);
+    }
+
 
     @RequestMapping(value = {"", "/"}, method = RequestMethod.POST)
     public void addImage(@RequestParam("file") MultipartFile file,
@@ -43,11 +58,8 @@ public class ImageRestController implements ServletContextAware {
         image.setPostId(postId);
         image.setImageFile(file);
 
-        String imagesPath = servletContext.getRealPath("/") + "static/images/";
-
-        imageService.saveImage(image, imagesPath);
+        imageService.saveImage(image, servletContext.getRealPath("/"));
     }
-
 
     @Override
     public void setServletContext(ServletContext servletContext) {

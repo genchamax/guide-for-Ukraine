@@ -2,10 +2,12 @@ package ua.com.guide.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.ServletContextAware;
 import ua.com.guide.model.City;
 import ua.com.guide.model.Region;
 import ua.com.guide.service.RegionService;
 
+import javax.servlet.ServletContext;
 import java.util.List;
 
 /**
@@ -13,7 +15,9 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/regions")
-public class RegionRestController {
+public class RegionRestController implements ServletContextAware {
+
+    private ServletContext servletContext;
 
     @Autowired
     private RegionService regionService;
@@ -43,7 +47,7 @@ public class RegionRestController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     private String deleteRegion(@PathVariable("id") Integer id) {
-        regionService.deleteById(id);
+        regionService.deleteById(servletContext.getRealPath("/"), id);
         return "redirect:";
     }
 
@@ -53,4 +57,8 @@ public class RegionRestController {
         return regionService.getAllCityOfTheRegion(id);
     }
 
+    @Override
+    public void setServletContext(ServletContext servletContext) {
+        this.servletContext = servletContext;
+    }
 }

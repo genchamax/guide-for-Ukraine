@@ -2,9 +2,11 @@ package ua.com.guide.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.ServletContextAware;
 import ua.com.guide.model.Post;
 import ua.com.guide.service.PostService;
 
+import javax.servlet.ServletContext;
 import java.util.List;
 
 /**
@@ -12,7 +14,9 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/posts")
-public class PostRestController {
+public class PostRestController implements ServletContextAware {
+
+    private ServletContext servletContext;
 
     @Autowired
     private PostService postService;
@@ -28,25 +32,24 @@ public class PostRestController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public String deletePostById(@PathVariable("id") Integer id) {
-        postService.deleteById(id);
-        return "redirect:";
+    public void deletePostById(@PathVariable("id") Integer id) {
+        postService.deleteById(servletContext.getRealPath("/"), id);
     }
 
     @RequestMapping(value = {"", "/"}, method = RequestMethod.POST)
-    public String addPost(@RequestBody Post post) {
+    public void addPost(@RequestBody Post post) {
         postService.create(post);
-        return "redirect:";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public String editPost(@PathVariable("id") Integer id, @RequestBody Post post) {
+    public void editPost(@PathVariable("id") Integer id, @RequestBody Post post) {
         post.setPostId(id);
         postService.update(post);
-        return "redirect:";
     }
 
-
-
+    @Override
+    public void setServletContext(ServletContext servletContext) {
+        this.servletContext = servletContext;
+    }
 }
 

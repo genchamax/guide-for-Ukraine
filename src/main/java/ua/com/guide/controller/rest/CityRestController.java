@@ -1,14 +1,14 @@
 package ua.com.guide.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.ServletContextAware;
 import ua.com.guide.model.City;
 import ua.com.guide.model.Place;
 import ua.com.guide.model.Region;
 import ua.com.guide.service.CityService;
 
-import java.beans.PropertyEditorSupport;
+import javax.servlet.ServletContext;
 import java.util.List;
 
 /**
@@ -16,7 +16,9 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/cities")
-public class CityRestController {
+public class CityRestController implements ServletContextAware {
+
+    private ServletContext servletContext;
 
     @Autowired
     private CityService cityService;
@@ -32,7 +34,7 @@ public class CityRestController {
     }
 
     @RequestMapping(value = {"", "/"}, method = RequestMethod.POST)
-    private String addCity(@RequestBody City city) {
+    private String addCity(@RequestBody City city, @RequestParam(value = "regionId", required = false) Integer regionId) {
         cityService.create(city);
         return "redirect:regions";
     }
@@ -46,7 +48,7 @@ public class CityRestController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     private String deleteCity(@PathVariable("id") Integer id) {
-        cityService.deleteById(id);
+        cityService.deleteById(servletContext.getRealPath("/"), id);
         return "redirect:";
     }
 
@@ -59,5 +61,10 @@ public class CityRestController {
     @RequestMapping(value = "/{id}/places", method = RequestMethod.GET)
     public List<Place> getPlaces(@PathVariable("id") Integer cityId) {
         return cityService.getAllPlacesOfTheCity(cityId);
+    }
+
+    @Override
+    public void setServletContext(ServletContext servletContext) {
+        this.servletContext = servletContext;
     }
 }

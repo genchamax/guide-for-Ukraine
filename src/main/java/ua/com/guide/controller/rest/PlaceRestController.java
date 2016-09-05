@@ -2,10 +2,12 @@ package ua.com.guide.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.ServletContextAware;
 import ua.com.guide.model.City;
 import ua.com.guide.model.Place;
 import ua.com.guide.service.PlaceService;
 
+import javax.servlet.ServletContext;
 import java.util.List;
 
 /**
@@ -13,7 +15,9 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/places")
-public class PlaceRestController {
+public class PlaceRestController implements ServletContextAware {
+
+    private ServletContext servletContext;
 
     @Autowired
     private PlaceService placeService;
@@ -48,9 +52,12 @@ public class PlaceRestController {
     }
 
     @RequestMapping(value = "/{id}/city", method = RequestMethod.GET)
-    public City getCity(@PathVariable("id") Integer placeId){
+    public City getCity(@PathVariable("id") Integer placeId) {
         return placeService.getCity(placeId);
     }
 
-
+    @Override
+    public void setServletContext(ServletContext servletContext) {
+        this.servletContext = servletContext;
+    }
 }
