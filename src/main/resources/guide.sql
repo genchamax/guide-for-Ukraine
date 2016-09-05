@@ -28,6 +28,7 @@ CREATE TABLE place (
   CONSTRAINT fk_place_city FOREIGN KEY (city_id) REFERENCES city (id)
 );
 
+# TODO: Add require field (for token)
 CREATE TABLE `user` (
   id              INT          NOT NULL  AUTO_INCREMENT PRIMARY KEY,
   user_password   CHAR(56)     NOT NULL,
