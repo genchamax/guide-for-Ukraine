@@ -1,8 +1,6 @@
 package ua.com.guide.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,11 +25,10 @@ public class City {
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "REGION_ID", nullable = false)
-    @JsonIgnoreProperties(allowSetters = true)
     private Region region;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "city")
-    @JsonIgnoreProperties (allowSetters = true)
+    @JsonIgnore
     private List<Place> places;
 
     public Integer getCityId() {

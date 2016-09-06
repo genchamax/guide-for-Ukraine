@@ -23,7 +23,7 @@ public class Region {
 
     //    If Delete Region delete all cities on this region
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "region")
-//    @JsonIgnoreProperties
+    @JsonIgnore
     private List<City> cities;
 
     public Integer getRegionId() {

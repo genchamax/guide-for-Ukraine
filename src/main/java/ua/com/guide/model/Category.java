@@ -1,8 +1,6 @@
 package ua.com.guide.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.annotation.JacksonStdImpl;
 
 import javax.persistence.*;
 import java.util.List;
@@ -23,7 +21,7 @@ public class Category {
     private String categoryName;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "category")
-    @JsonIgnoreProperties(allowSetters = true)
+    @JsonIgnore
     private List<Post> posts;
 
     public Integer getCategoryId() {

@@ -46,14 +46,14 @@ public class User {
     private String userStatus;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "author")
-    @JsonIgnoreProperties(allowSetters = true)
+    @JsonIgnore
     private List<Post> userPosts;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "USER_FAVOURITE_POST",
             joinColumns = @JoinColumn(name = "post_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
-    @JsonIgnoreProperties(allowSetters = true)
+    @JsonIgnore
     private List<Post> likedPosts;
 
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)

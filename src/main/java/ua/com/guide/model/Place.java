@@ -1,6 +1,6 @@
 package ua.com.guide.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
@@ -25,7 +25,7 @@ public class Place {
     private City city;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "place")
-    @JsonIgnoreProperties(allowSetters = true)
+    @JsonIgnore
     private List<Post> posts;
 
     public Integer getPlaceId() {
