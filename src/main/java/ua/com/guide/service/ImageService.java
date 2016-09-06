@@ -82,10 +82,17 @@ public class ImageService {
         File imagesPath = new File(generatePathByLevelAndId(root, level, id));
         try {
             for (File file : imagesPath.listFiles()) {
-                    deleteImage(root, file.getName());
+                deleteImage(root, file.getName());
             }
         } catch (NullPointerException e) {
             LOGGER.error("Directory {} is empty.", imagesPath.getAbsolutePath());
+        }
+
+        boolean isDeletePath = imagesPath.delete();
+        if (isDeletePath) {
+            LOGGER.info("Deleted directory {} with path {} ", imagesPath.getName(), imagesPath.getAbsolutePath());
+        } else {
+            LOGGER.error("Directory {} with path {} not deleted", imagesPath.getName(), imagesPath.getAbsolutePath());
         }
     }
 
@@ -154,7 +161,11 @@ public class ImageService {
     }
 
     private Integer optionalParseInt(Matcher matcher, int groupIndex) {
-        matcher.matches();
+        boolean isMatches = matcher.matches();
+        if (!isMatches) {
+            LOGGER.error("File name {} don't match with pattern", matcher.pattern().pattern());
+            throw new IllegalArgumentException("File name " + matcher.pattern().pattern() + " don't match with pattern");
+        }
         String id = matcher.group(groupIndex);
         return (id == null || id.equals("")) ? null : Integer.parseInt(id);
     }
@@ -168,7 +179,7 @@ public class ImageService {
         try {
             for (File file : imagesFolder.listFiles()) {
                 if (file.isFile() && !file.isDirectory()) {
-                    images.add(file.getPath());
+                    images.add(file.getPath().replace(root, "\\"));
                 }
             }
         } catch (NullPointerException e) {

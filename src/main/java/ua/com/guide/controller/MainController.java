@@ -46,12 +46,16 @@ public class MainController {
 
     @RequestMapping(value = "/admin/categories", method = RequestMethod.GET)
     public String goAdminCategories() {
-        System.out.println("Catch em");
         return "/admin/categories";
     }
 
     @RequestMapping(value = "test/post/new", method = RequestMethod.GET)
     public String goNewPost(){
         return "test/newPost";
+    }
+
+    @RequestMapping(value = "test/upload")
+    public String goUpload(){
+        return "test/FIleUpload";
     }
 }

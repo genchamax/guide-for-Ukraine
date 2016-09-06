@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>File upload</title>
+</head>
+<body>
+<form action="/api/images/" method="POST" enctype="multipart/form-data">
+    <input type="text" name="regionId" placeholder="region"/>
+    <input type="text" name="cityId" placeholder="cityId"/>
+    <input type="text" name="placeId" placeholder="placeId"/>
+    <input type="text" name="postId" placeholder="postId"/>
+    <input type="file" name="file"/>
+    <input type="submit"/>
+    <!--<input type="button" id="GOGOGO">-->
+</form>
+<script src="/static/components/jquery/jquery.min.js"></script>
+<!--<script>-->
+    <!--(function () {-->
+        <!--$("#GOGOGO").click(function () {-->
+            <!--var data = new FormData();-->
+            <!--data.append("file", $("input[type = 'file']").file);-->
+            <!--$.ajax({-->
+                <!--url: "/api/images",-->
+                <!--data: data,-->
+                <!--cache: false,-->
+                <!--contentType: false,-->
+                <!--processData: false,-->
+                <!--type: "POST",-->
+                <!--success: function (data) {-->
+                    <!--console.log(data);-->
+                    <!--alert("success");-->
+                <!--}-->
+            <!--})-->
+        <!--});-->
+<!---->
+    <!--})();-->
+<!--</script>-->
+</body>
+</html>
