@@ -1,5 +1,7 @@
 package ua.com.guide.controller;
 
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -50,12 +52,27 @@ public class MainController {
     }
 
     @RequestMapping(value = "test/post/new", method = RequestMethod.GET)
-    public String goNewPost(){
+    public String goNewPost() {
         return "test/newPost";
     }
 
     @RequestMapping(value = "test/upload")
-    public String goUpload(){
+    public String goUpload() {
         return "test/FIleUpload";
+    }
+
+    @RequestMapping(value = "/admin/index")
+    public String goToAdminIndex() {
+        return "admin/index";
+    }
+
+    @RequestMapping(value = "/login")
+    public String goLogin() {
+        return "login/login";
+    }
+
+    @RequestMapping(value = "/403")
+    public String go403() {
+        return "login/403";
     }
 }

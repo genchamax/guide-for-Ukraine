@@ -2,6 +2,7 @@ package ua.com.guide.controller.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ua.com.guide.model.Category;
@@ -22,12 +23,12 @@ public class CategoryRestController {
     private CategoryService categoryService;
 
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
-    public @ResponseBody List<Category> getAllCategories() {
+    public List<Category> getAllCategories() {
         return categoryService.getAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public @ResponseBody Category getCategoryById(@PathVariable("id") Integer id) {
+    public Category getCategoryById(@PathVariable("id") Integer id) {
         return (Category) categoryService.getById(id);
     }
 
@@ -52,7 +53,7 @@ public class CategoryRestController {
 
     // TODO: 11.08.2016 Test this method
     @RequestMapping(value = "/{id}/posts", method = RequestMethod.GET)
-    public @ResponseBody List<Post> getPostsByCategoryId(@PathVariable("id") Integer categoryId) {
+    public List<Post> getPostsByCategoryId(@PathVariable("id") Integer categoryId) {
         return categoryService.getPostsOfTheCategory(categoryId);
     }
 }

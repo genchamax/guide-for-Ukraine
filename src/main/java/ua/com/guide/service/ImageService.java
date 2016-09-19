@@ -179,7 +179,7 @@ public class ImageService {
         try {
             for (File file : imagesFolder.listFiles()) {
                 if (file.isFile() && !file.isDirectory()) {
-                    images.add(file.getPath().replace(root, "\\"));
+                    images.add(file.getPath().replace(root, "\\").replace("\\", "/"));
                 }
             }
         } catch (NullPointerException e) {

@@ -9,6 +9,7 @@
         <param-value>
             /WEB-INF/spring/applicationContext.xml
             /WEB-INF/spring/databaseConfig.xml
+            /WEB-INF/spring/securityConfig.xml
             <!--/WEB-INF/spring/dispatcherServlet.xml-->
         </param-value>
     </context-param>
@@ -27,12 +28,23 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <!--Hibernate filter-->
     <filter>
         <filter-name>hibernateFilter</filter-name>
         <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>hibernateFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--Security filter-->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 

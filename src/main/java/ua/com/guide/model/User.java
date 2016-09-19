@@ -42,8 +42,9 @@ public class User {
     @Column(name = "USER_BIRTH")
     private Date userBirth;
 
-    @Column(name = "USER_STATUS", nullable = false)
-    private String userStatus;
+    // Default value false (in database)
+    @Column(name = "ENABLED")
+    private Boolean enabled;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "author")
     @JsonIgnore
@@ -56,9 +57,9 @@ public class User {
     @JsonIgnore
     private List<Post> likedPosts;
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
-//    @JoinColumn(name = "FAVOURITE_POSTS_ID")
-//    private List<Post> favouritePosts;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "ROLE_ID", nullable = false)
+    private Role role;
 
     public Integer getUserId() {
         return userId;
@@ -124,14 +125,6 @@ public class User {
         this.userBirth = userBirth;
     }
 
-    public String getUserStatus() {
-        return userStatus;
-    }
-
-    public void setUserStatus(String userStatus) {
-        this.userStatus = userStatus;
-    }
-
     public List<Post> getUserPosts() {
         return userPosts;
     }
@@ -146,5 +139,37 @@ public class User {
 
     public void setLikedPosts(List<Post> likedPosts) {
         this.likedPosts = likedPosts;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    @Override
+    public int hashCode() {
+        return userId.hashCode() + userName.hashCode() + userBirth.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof User))
+            return false;
+
+        User aUser = (User) obj;
+
+        return aUser.hashCode() == this.hashCode() && this.userId.equals(aUser.getUserId());
+
     }
 }

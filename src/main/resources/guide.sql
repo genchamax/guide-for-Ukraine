@@ -1,4 +1,4 @@
-CREATE DATABASE guide;
+CREATE DATABASE IF NOT EXISTS guide;
 
 USE guide;
 
@@ -28,7 +28,11 @@ CREATE TABLE place (
   CONSTRAINT fk_place_city FOREIGN KEY (city_id) REFERENCES city (id)
 );
 
-# TODO: Add require field (for token)
+CREATE TABLE `role` (
+  id        INT         NOT NULL  AUTO_INCREMENT PRIMARY KEY,
+  role_name VARCHAR(30) NOT NULL
+);
+
 CREATE TABLE `user` (
   id              INT          NOT NULL  AUTO_INCREMENT PRIMARY KEY,
   user_password   CHAR(56)     NOT NULL,
@@ -38,9 +42,10 @@ CREATE TABLE `user` (
   user_surname    VARCHAR(100) NULL,
   user_patronymic VARCHAR(100) NULL,
   user_birth      DATE         NULL,
-  user_status     VARCHAR(20)  NOT NULL
+  enabled         BOOLEAN      NOT NULL DEFAULT FALSE ,
+  role_id         INT          NOT NULL,
+  CONSTRAINT fk_user_role FOREIGN KEY (role_id) REFERENCES `role` (id)
 );
-
 
 CREATE TABLE post (
   id           INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -108,6 +113,11 @@ INSERT INTO city (city_description, city_name, region_id) VALUES
   ("SOME CdfsfITY", "879", 2),
   ("SOME CqqqqqqITY", "3re3", 2);
 
-INSERT INTO user (user_password, user_login, email, user_name, user_surname, user_patronymic, user_birth, user_status)
+INSERT INTO `role` (role_name) VALUES
+  ("ADMIN"),
+  ("USER");
+
+INSERT INTO `user` (user_password, user_login, email, user_name, user_surname, user_patronymic, user_birth, role_id)
 VALUES
-  ("loloco97", "vikaafanaseva", "vikalorax@mail.ru", "Вікторія", "Афанасьєва", "Віталіївна", "1997-07-10", "ADMIN");
+  ("loloco97", "vikaafanaseva", "vikalorax@mail.ru", "Вікторія", "Афанасьєва", "Віталіївна", "1997-07-10", 1),
+  ("password", "somelogin", "test@test.com", "Іван", "Іванов", "Іванович", "1987-05-3", 2);

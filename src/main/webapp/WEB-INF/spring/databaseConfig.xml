@@ -2,35 +2,47 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns="http://www.springframework.org/schema/beans"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:beans="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/guide"/>
-        <property name="username" value="root"/>
-        <property name="password" value="root"/>
-    </bean>
+    <beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <beans:property name="url" value="jdbc:mysql://localhost:3306/guide"/>
+        <beans:property name="username" value="root"/>
+        <beans:property name="password" value="root"/>
+    </beans:bean>
 
     <tx:annotation-driven transaction-manager="txManager"/>
 
-    <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
+    <beans:bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <beans:property name="sessionFactory" ref="sessionFactory"/>
+    </beans:bean>
 
     <!--TODO: !! org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean == org.springframework.orm.hibernate4.LocalSessionFactoryBean  !!-->
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="packagesToScan" value="ua.com.guide.model"/>
-        <property name="hibernateProperties">
+    <beans:bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <beans:property name="dataSource" ref="dataSource"/>
+        <beans:property name="packagesToScan" value="ua.com.guide.model"/>
+        <beans:property name="hibernateProperties">
             <value>
                 hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
                 hibernate.show_sql=true
                 <!--hibernate.hbm2ddl.auto=create -->
             </value>
-        </property>
-    </bean>
+        </beans:property>
+    </beans:bean>
 
-    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
+    <beans:bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
+        <beans:property name="sessionFactory" ref="sessionFactory"/>
+    </beans:bean>
+
+
+    <!--<security:authentication-manager>-->
+        <!--<security:authentication-provider>-->
+            <!--<security:jdbc-user-service data-source-ref="dataSource"-->
+                               <!--users-by-username-query="SELECT user_login, user_password, enabled FROM `user` WHERE user_login=?"-->
+                               <!--authorities-by-username-query="SELECT u.user_login, r.role_name FROM `user` u, role r-->
+                                                                <!--WHERE u.role_id = r.id AND u.user_login = ?"/>-->
+        <!--</security:authentication-provider>-->
+    <!--</security:authentication-manager>-->
 </beans>

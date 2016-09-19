@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:beans="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
@@ -7,21 +8,21 @@
 
     <context:annotation-config/>
 
-    <bean id="dao" class="ua.com.guide.dao.AbstractDaoImpl"/>
+    <beans:bean id="dao" class="ua.com.guide.dao.AbstractDaoImpl"/>
 
-    <bean id="categoryService" class="ua.com.guide.service.CategoryService"/>
+    <beans:bean id="categoryService" class="ua.com.guide.service.CategoryService"/>
 
-    <bean id="regionService" class="ua.com.guide.service.RegionService"/>
+    <beans:bean id="regionService" class="ua.com.guide.service.RegionService"/>
 
-    <bean id="cityService" class="ua.com.guide.service.CityService"/>
+    <beans:bean id="cityService" class="ua.com.guide.service.CityService"/>
 
-    <bean id="commentService" class="ua.com.guide.service.CommentService"/>
+    <beans:bean id="commentService" class="ua.com.guide.service.CommentService"/>
 
-    <bean id="imageService" class="ua.com.guide.service.ImageService"/>
+    <beans:bean id="imageService" class="ua.com.guide.service.ImageService"/>
 
-    <bean id="placeService" class="ua.com.guide.service.PlaceService"/>
+    <beans:bean id="placeService" class="ua.com.guide.service.PlaceService"/>
 
-    <bean id="postService" class="ua.com.guide.service.PostService"/>
+    <beans:bean id="postService" class="ua.com.guide.service.PostService"/>
 
-    <bean id="userService" class="ua.com.guide.service.UserService"/>
+    <beans:bean id="userService" class="ua.com.guide.service.UserService"/>
 </beans>
