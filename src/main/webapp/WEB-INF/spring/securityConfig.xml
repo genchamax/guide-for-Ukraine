@@ -22,10 +22,6 @@
 
     <security:authentication-manager>
         <security:authentication-provider>
-            <!--<user-service>-->
-            <!--<user name="username" password="password" authorities="ADMIN"/>-->
-            <!--<user name="user" password="user" authorities="ADMIN" />-->
-            <!--</user-service>-->
             <security:jdbc-user-service data-source-ref="dataSource"
                                         users-by-username-query="SELECT user_login, user_password, enabled FROM `user` WHERE user_login=?"
                                         authorities-by-username-query="SELECT u.user_login, r.role_name FROM `user` u, `role` r
