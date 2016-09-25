@@ -1,6 +1,7 @@
 package ua.com.guide.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import ua.com.guide.model.City;
 import ua.com.guide.model.Place;
 import ua.com.guide.model.Region;
@@ -30,6 +31,7 @@ public class CityService extends BasicService {
         return city.getPlaces();
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void deleteById(String root, Integer id) {
         imageService.deleteImagesInPath(root, ImagePathLevel.CITY, id);
         deleteById(id);

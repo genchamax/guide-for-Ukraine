@@ -1,6 +1,7 @@
 package ua.com.guide.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import ua.com.guide.model.City;
 import ua.com.guide.model.Place;
 import ua.com.guide.util.enums.ImagePathLevel;
@@ -17,11 +18,24 @@ public class PlaceService extends BasicService {
     @Autowired
     private ImageService imageService;
 
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
+    @Override
+    public Object create(Object entity) {
+        return super.create(entity);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @Override
+    public Object update(Object entity) {
+        return super.update(entity);
+    }
+
     public City getCity(Integer placeId) {
         Place place = (Place) getById(placeId);
         return place.getCity();
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void deleteById(String root, Integer id) {
         imageService.deleteImagesInPath(root, ImagePathLevel.PLACE, id);
         deleteById(id);

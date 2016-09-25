@@ -1,6 +1,7 @@
 package ua.com.guide.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import ua.com.guide.model.City;
 import ua.com.guide.model.Region;
@@ -21,11 +22,24 @@ public class RegionService extends BasicService {
         super(Region.class);
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @Override
+    public Object create(Object entity) {
+        return super.create(entity);
+    }
+
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @Override
+    public Object update(Object entity) {
+        return super.update(entity);
+    }
+
     public List<City> getAllCityOfTheRegion(Integer id) {
         Region region = (Region) getById(id);
         return region.getCities();
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void deleteById(String root, Integer id) {
         imageService.deleteImagesInPath(root, ImagePathLevel.REGION, id);
         deleteById(id);
