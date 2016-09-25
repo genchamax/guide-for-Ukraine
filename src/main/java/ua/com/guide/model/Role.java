@@ -22,7 +22,7 @@ public class Role {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "role")
     @JsonIgnore
-    private List<User> users;
+    private List<UserDetails> users;
 
     public Integer getRoleId() {
         return roleId;
@@ -40,11 +40,11 @@ public class Role {
         this.roleName = roleName;
     }
 
-    public List<User> getUsers() {
+    public List<UserDetails> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(List<UserDetails> users) {
         this.users = users;
     }
 

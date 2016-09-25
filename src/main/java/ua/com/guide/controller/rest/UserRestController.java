@@ -3,7 +3,7 @@ package ua.com.guide.controller.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ua.com.guide.model.Post;
-import ua.com.guide.model.User;
+import ua.com.guide.model.UserDetails;
 import ua.com.guide.service.UserService;
 
 import java.util.List;
@@ -19,13 +19,13 @@ public class UserRestController {
     private UserService userService;
 
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
-    public List<User> getAllUsers() {
+    public List<UserDetails> getAllUsers() {
         return userService.getAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public User getUserById(@PathVariable("id") Integer userId) {
-        return (User) userService.getById(userId);
+    public UserDetails getUserById(@PathVariable("id") Integer userId) {
+        return (UserDetails) userService.getById(userId);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -34,12 +34,12 @@ public class UserRestController {
     }
 
     @RequestMapping(value = {"", "/"}, method = RequestMethod.POST)
-    public void addUser(@RequestBody User user) {
+    public void addUser(@RequestBody UserDetails user) {
         userService.create(user);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public void editUser(@PathVariable("id") Integer userId, @RequestBody User user) {
+    public void editUser(@PathVariable("id") Integer userId, @RequestBody UserDetails user) {
         user.setUserId(userId);
         userService.update(user);
     }
@@ -52,5 +52,10 @@ public class UserRestController {
     @RequestMapping(value = "/{id}/posts/liked", method = RequestMethod.GET)
     public List<Post> getLikedPost(@PathVariable("id") Integer userId) {
         return userService.getAllUserLikedPost(userId);
+    }
+
+    @RequestMapping(value = "/current", method = RequestMethod.GET)
+    public UserDetails getCurrentUser () {
+        return userService.getCurrentUser();
     }
 }

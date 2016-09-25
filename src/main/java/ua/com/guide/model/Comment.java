@@ -23,7 +23,7 @@ public class Comment {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID", nullable = false)
-    private User author;
+    private UserDetails author;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Post post;
@@ -52,11 +52,11 @@ public class Comment {
         this.commentDate = commentDate;
     }
 
-    public User getAuthor() {
+    public UserDetails getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(UserDetails author) {
         this.author = author;
     }
 

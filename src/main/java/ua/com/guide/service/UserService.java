@@ -1,20 +1,29 @@
 package ua.com.guide.service;
 
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 import ua.com.guide.model.Post;
-import ua.com.guide.model.User;
+import ua.com.guide.model.UserDetails;
 
 import java.util.List;
 
 /**
  * Created by Max on 10.08.2016.
  */
+@Service
 public class UserService extends BasicService {
 
     public UserService() {
-        super(User.class);
+        super(UserDetails.class);
     }
+
+    @Autowired
+    SessionFactory sessionFactory;
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     @Override
@@ -41,30 +50,40 @@ public class UserService extends BasicService {
     }
 
     @PreAuthorize("permitAll()")
-    public User create(User user) {
+    public UserDetails create(UserDetails user) {
         user.setPassword(encryptUserPassword(user));
-        return (User) super.create(user);
+        return (UserDetails) super.create(user);
     }
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
-    public User update(User user) {
+    public UserDetails update(UserDetails user) {
         user.setPassword(encryptUserPassword(user));
-        return (User) super.update(user);
+        return (UserDetails) super.update(user);
     }
 
     public List<Post> getAllUserCreatedPost(Integer userId) {
-        User user = (User) getById(userId);
+        UserDetails user = (UserDetails) getById(userId);
         return user.getUserPosts();
     }
 
     public List<Post> getAllUserLikedPost(Integer userId) {
-        User user = (User) getById(userId);
+        UserDetails user = (UserDetails) getById(userId);
         return user.getLikedPosts();
     }
 
-    private String encryptUserPassword(User user) {
+    private String encryptUserPassword(UserDetails user) {
         String userPassword = user.getPassword();
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         return bCryptPasswordEncoder.encode(userPassword);
+    }
+
+    @PreAuthorize("authenticated")
+    public UserDetails getCurrentUser() {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        return (UserDetails) sessionFactory.getCurrentSession().createQuery(
+                "FROM UserDetails WHERE email = :email")
+                .setParameter("email", user.getUsername())
+                .uniqueResult();
     }
 }

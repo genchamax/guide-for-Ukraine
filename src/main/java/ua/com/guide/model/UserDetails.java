@@ -2,7 +2,6 @@ package ua.com.guide.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,7 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "USER")
 @JsonIgnoreProperties(value = {"password"}, allowSetters = true)
-public class User {
+public class UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -154,10 +153,10 @@ public class User {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof User))
+        if (!(obj instanceof UserDetails))
             return false;
 
-        User aUser = (User) obj;
+        UserDetails aUser = (UserDetails) obj;
 
         return aUser.hashCode() == this.hashCode() && this.userId.equals(aUser.getUserId());
 

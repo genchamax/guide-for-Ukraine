@@ -41,14 +41,14 @@ public class Post {
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "USER_ID", nullable = false)
-    private User author;
+    private UserDetails author;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "USER_FAVOURITE_POST",
             joinColumns = @JoinColumn(name = "USER_ID"),
             inverseJoinColumns = @JoinColumn(name = "POST_ID"))
     @JsonIgnore
-    private List<User> likingUser; // TODO: 11.08.2016 Check grammar
+    private List<UserDetails> likingUser; // TODO: 11.08.2016 Check grammar
 
     public Integer getPostId() {
         return postId;
@@ -106,19 +106,19 @@ public class Post {
         this.category = category;
     }
 
-    public User getAuthor() {
+    public UserDetails getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(UserDetails author) {
         this.author = author;
     }
 
-    public List<User> getLikingUser() {
+    public List<UserDetails> getLikingUser() {
         return likingUser;
     }
 
-    public void setLikingUser(List<User> likingUser) {
+    public void setLikingUser(List<UserDetails> likingUser) {
         this.likingUser = likingUser;
     }
 }
