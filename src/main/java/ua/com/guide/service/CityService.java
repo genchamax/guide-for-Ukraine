@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ua.com.guide.model.City;
 import ua.com.guide.model.Place;
 import ua.com.guide.model.Region;
-import ua.com.guide.model.enums.ImagePathLevel;
+import ua.com.guide.util.enums.ImagePathLevel;
 
 import java.util.List;
 

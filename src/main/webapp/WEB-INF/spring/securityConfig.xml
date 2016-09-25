@@ -12,22 +12,22 @@
     <security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
 
     <security:http auto-config="true" use-expressions="true">
-        <security:intercept-url pattern="/admin*" access="hasAuthority('ADMIN')"/>
+        <security:intercept-url pattern="/admin*" access="hasAnyAuthority('ADMIN')"/>
         <security:intercept-url pattern="/admin/*" access="hasAuthority('ADMIN')"/>
         <security:form-login login-page="/login" authentication-failure-url="/403"
                              login-processing-url="/j_spring_security_check"
-                             password-parameter="j_password" username-parameter="j_username"/>
+                             password-parameter="j_password" username-parameter="email"/>
         <csrf disabled="true"/>
     </security:http>
 
     <security:authentication-manager>
         <security:authentication-provider>
             <security:jdbc-user-service data-source-ref="dataSource"
-                                        users-by-username-query="SELECT user_login, user_password, enabled FROM `user` WHERE user_login=?"
-                                        authorities-by-username-query="SELECT u.user_login, r.role_name FROM `user` u, `role` r
-                                                                        WHERE u.role_id = r.id AND u.user_login=?"/>
+                                        users-by-username-query="SELECT email, user_password, enabled FROM `user` WHERE email=?"
+                                        authorities-by-username-query="SELECT u.email, r.role_name FROM `user` u, `role` r
+                                                                        WHERE u.role_id = r.id AND u.email=?"/>
+            <security:password-encoder hash="bcrypt"/>
         </security:authentication-provider>
-
     </security:authentication-manager>
 
 </beans:beans>

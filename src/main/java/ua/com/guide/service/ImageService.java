@@ -9,7 +9,7 @@ import ua.com.guide.model.City;
 import ua.com.guide.model.Image;
 import ua.com.guide.model.Place;
 import ua.com.guide.model.Post;
-import ua.com.guide.model.enums.ImagePathLevel;
+import ua.com.guide.util.enums.ImagePathLevel;
 
 import java.io.File;
 import java.io.IOException;

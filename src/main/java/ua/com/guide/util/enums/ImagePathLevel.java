@@ -1,4 +1,4 @@
-package ua.com.guide.model.enums;
+package ua.com.guide.util.enums;
 
 /**
  * Created by Max on 04.09.2016.

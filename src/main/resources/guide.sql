@@ -35,14 +35,13 @@ CREATE TABLE `role` (
 
 CREATE TABLE `user` (
   id              INT          NOT NULL  AUTO_INCREMENT PRIMARY KEY,
-  user_password   CHAR(56)     NOT NULL,
-  user_login      VARCHAR(100) NOT NULL,
-  email           VARCHAR(100) NULL,
+  user_password   CHAR(90)        NOT NULL,
+  email           VARCHAR(100) NOT NULL,
   user_name       VARCHAR(100) NOT NULL,
   user_surname    VARCHAR(100) NULL,
   user_patronymic VARCHAR(100) NULL,
   user_birth      DATE         NULL,
-  enabled         BOOLEAN      NOT NULL DEFAULT FALSE ,
+  enabled         BOOLEAN      NOT NULL  DEFAULT FALSE,
   role_id         INT          NOT NULL,
   CONSTRAINT fk_user_role FOREIGN KEY (role_id) REFERENCES `role` (id)
 );
@@ -117,7 +116,7 @@ INSERT INTO `role` (role_name) VALUES
   ("ADMIN"),
   ("USER");
 
-INSERT INTO `user` (user_password, user_login, email, user_name, user_surname, user_patronymic, user_birth, role_id)
+INSERT INTO `user` (user_password, email, user_name, user_surname, user_patronymic, user_birth, role_id, enabled)
 VALUES
-  ("loloco97", "vikaafanaseva", "vikalorax@mail.ru", "Вікторія", "Афанасьєва", "Віталіївна", "1997-07-10", 1),
-  ("password", "somelogin", "test@test.com", "Іван", "Іванов", "Іванович", "1987-05-3", 2);
+  ("loloco97", "vikalorax@mail.ru", "Вікторія", "Афанасьєва", "Віталіївна", "1997-07-10", 1, TRUE),
+  ("password", "test@test.com", "Іван", "Іванов", "Іванович", "1987-05-3", 2, TRUE);

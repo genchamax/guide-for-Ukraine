@@ -17,7 +17,7 @@ public class Role {
     @Column(name = "ID", nullable = false)
     private Integer roleId;
 
-    @Column(name = "ROLE_NAME", nullable = false)
+    @Column(name = "ROLE_NAME")
     private String roleName;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "role")

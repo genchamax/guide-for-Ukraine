@@ -2,6 +2,7 @@ package ua.com.guide.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "USER")
+@JsonIgnoreProperties(value = {"password"}, allowSetters = true)
 public class User {
 
     @Id
@@ -20,14 +22,9 @@ public class User {
     private Integer userId;
 
     @Column(name = "USER_PASSWORD", nullable = false)
-    @JsonIgnoreProperties(allowSetters = true)
     private String password;
 
-    @Column(name = "USER_LOGIN", nullable = false)
-    @JsonIgnoreProperties(allowSetters = true)
-    private String login;
-
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL", nullable = false)
     private String email;
 
     @Column(name = "USER_NAME", nullable = false)
@@ -43,8 +40,9 @@ public class User {
     private Date userBirth;
 
     // Default value false (in database)
-    @Column(name = "ENABLED")
-    private Boolean enabled;
+    @Column(name = "ENABLED", columnDefinition = "BOOLEAN DEFAULT FALSE", nullable = false)
+    @JsonIgnore
+    private Boolean enabled = false;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "author")
     @JsonIgnore
@@ -57,7 +55,7 @@ public class User {
     @JsonIgnore
     private List<Post> likedPosts;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "ROLE_ID", nullable = false)
     private Role role;
 
@@ -75,14 +73,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getEmail() {

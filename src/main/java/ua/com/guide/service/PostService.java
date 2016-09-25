@@ -2,7 +2,7 @@ package ua.com.guide.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import ua.com.guide.model.Post;
-import ua.com.guide.model.enums.ImagePathLevel;
+import ua.com.guide.util.enums.ImagePathLevel;
 
 /**
  * Created by Max on 10.08.2016.
